@@ -20,6 +20,7 @@ let titles = [
   'The Shawshank Redemption',
   'What Dreams May Come',
 ];
+
 let director = [
   'Richard Curtis',
   'Tim Burton',
@@ -33,42 +34,52 @@ let director = [
   'Vincent Ward',
 ];
 
-const random = (min, max) => Math.floor(Math.random() * (max - min) + min);
-const randomToFixed = (min, max) =>
-  (Math.random() * (max - min) + min).toFixed(1);
+const random = (a = 1, b = 0) => {
+  const lower = Math.min(a, b);
+  const upper = Math.max(a, b);
+  return lower + Math.random() * (upper - lower);
+};
+
+const randomInt = (a = 1, b = 0) => {
+  const lower = Math.ceil(Math.min(a, b));
+  const upper = Math.floor(Math.max(a, b));
+  return Math.floor(lower + Math.random() * (upper - lower + 1));
+};
 
 function randomDate(date1, date2) {
   date1 = new Date(date1).getTime();
   date2 = new Date(date2).getTime();
   if (date1 > date2) {
-    return new Date(random(date2, date1)).toLocaleDateString();
+    return new Date(randomInt(date2, date1)).toLocaleDateString();
   } else {
-    return new Date(random(date1, date2)).toLocaleDateString();
+    return new Date(randomInt(date1, date2)).toLocaleDateString();
   }
 }
 
 function randomString(len, charSet) {
-  charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ';
-  var randomString = '';
-  for (var i = 0; i < len; i++) {
-    var randomPoz = Math.floor(Math.random() * charSet.length);
+  charSet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ';
+  let randomString = '';
+  for (let i = 0; i < len; i++) {
+    let randomPoz = Math.floor(Math.random() * charSet.length);
     randomString += charSet.substring(randomPoz, randomPoz + 1);
   }
   return randomString;
 }
 
-const result = [...Array(10).keys()].map((id) => ({
-  titles: titles[id],
-  releseDate: randomDate('01/01/1990', '01/01/2021'),
-  plot: randomString(100),
-  poster: `./images/posters/${id + 1}.jpg`,
-  boxOffice:
-    '$' +
-    random(300000000, 600000000)
-      .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, ' '),
-  rating: randomToFixed(1, 10),
-  director: director[id],
-}));
+const createmockData = (numArrLength) => {
+  let result = [...Array(numArrLength).keys()].map(
+    (item, index) =>
+      (item = {
+        titles: titles[index],
+        releseDate: randomDate('01/01/1990', '01/01/2021'),
+        plot: randomString(100),
+        poster: `./images/posters/${index + 1}.jpg`,
+        boxOffice: randomInt(300000000, 600000000),
+        rating: random(1, 10).toFixed(1),
+        director: director[index],
+      })
+  );
+  return result;
+};
 
-console.log(result);
+console.log(createmockData(10));

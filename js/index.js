@@ -72,7 +72,7 @@ const createmockData = (numArrLength) => {
       (item = {
         titles: titles[index],
         releseDate: randomDate('01/01/1990', '01/01/2021'),
-        plot: randomString(100),
+        plot: randomString(50),
         poster: `./images/posters/${index + 1}.jpg`,
         boxOffice: randomInt(300000000, 600000000),
         rating: random(1, 10).toFixed(1),
@@ -81,5 +81,30 @@ const createmockData = (numArrLength) => {
   );
   return result;
 };
+const filmList = document.querySelector('.film-list');
 
-console.log(createmockData(10));
+function getFilmsCards(n) {
+  const films = createmockData(n);
+  const template = document.querySelector('#card-template');
+  films.forEach((obj) => {
+    let cloneDiv = template.content.cloneNode(true);
+    cloneDiv.querySelector('.card-header__title').textContent = obj.titles;
+    cloneDiv.querySelector('.card-header__image').src = obj.poster;
+    cloneDiv.querySelector('.film-info__rating :last-child').textContent =
+      obj.rating;
+    cloneDiv.querySelector('.film-info__plot :last-child').textContent =
+      obj.plot;
+    cloneDiv.querySelector('.film-info__release-date :last-child').textContent =
+      obj.releseDate;
+    cloneDiv.querySelector('.film-info__director :last-child').textContent =
+      obj.director;
+    cloneDiv.querySelector(
+      '.film-info__box-office :last-child'
+    ).textContent = `$${obj.boxOffice
+      .toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
+    filmList.appendChild(cloneDiv);
+  });
+}
+
+getFilmsCards(10);

@@ -1,22 +1,22 @@
 @font-face {
-  font-family: "Roboto";
-  src: url("../fonts/Roboto-Bold.woff2") format("woff2");
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Bold.woff2') format('woff2');
   font-weight: 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Roboto";
-  src: url("../fonts/Roboto-Regular.woff2") format("woff2");
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Roboto";
-  src: url("../fonts/Roboto-Medium.woff2") format("woff2");
+  font-family: 'Roboto';
+  src: url('../fonts/Roboto-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -52,12 +52,11 @@ main {
   flex-grow: 1;
   padding: 4rem 6rem;
   color: #353535;
-  font-family: "Roboto", "Arial", sans-serif;
+  font-family: 'Roboto', 'Arial', sans-serif;
   font-size: 16px;
   background-color: #f0f0ea;
   min-height: 100vh;
 }
-
 
 fieldset {
   margin: 0;
@@ -77,18 +76,19 @@ h1 {
 .film-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
+
   grid-gap: 0.75rem;
   justify-content: center;
-
 }
 
 /*
     card
 */
 .card {
-display: grid;
-grid-auto-flow: row;
-grid-template: auto 1fr auto auto / 1fr;
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-columns: 300px;
 }
 
 .card-header__title {
@@ -192,13 +192,13 @@ grid-template: auto 1fr auto auto / 1fr;
 }
 .button_add:hover::before,
 .button_add:focus::before {
-  content: "Добавить в Избранные";
+  content: 'Добавить в Избранные';
   background-color: #1cd87a;
 }
 
 .button_remove:hover::before,
 .button_remove:focus::before {
-  content: "Удалить из Избранныx";
+  content: 'Удалить из Избранныx';
   background-color: #e04747;
 }
 
@@ -223,7 +223,7 @@ grid-template: auto 1fr auto auto / 1fr;
 .button_add:focus::after,
 .button_remove:hover::after,
 .button_remove:focus::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 28%;
   top: -38%;
@@ -275,9 +275,12 @@ grid-template: auto 1fr auto auto / 1fr;
 }
 
 .film-info__title::after {
-  content: ":";
+  content: ':';
 }
 
+.film-info__plot .film-info__text {
+  word-break: break-all;
+}
 /*
   search
 */
@@ -338,7 +341,7 @@ grid-template: auto 1fr auto auto / 1fr;
 }
 
 .filter__check + label::before {
-  content: "";
+  content: '';
   width: 1.3em;
   height: 1.3em;
   border: 2px solid #64588d;
@@ -350,7 +353,7 @@ grid-template: auto 1fr auto auto / 1fr;
 
 .filter__check:checked + label::before {
   border-color: #64588d;
-  background: center center / 90% no-repeat url("../images/check-box-icon.svg")
+  background: center center / 90% no-repeat url('../images/check-box-icon.svg')
     #64588d;
 }
 

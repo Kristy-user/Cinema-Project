@@ -87,12 +87,7 @@ h1 {
 .card {
   display: grid;
   grid-auto-flow: row;
-<<<<<<< HEAD
-  grid-template-rows: auto auto 1fr auto;
-  grid-template-columns: 300px;
-=======
   grid-template: auto auto 1fr auto / 1fr;
->>>>>>> 573c54953ec0d4f962655158e015dc6367e4850e
 }
 
 .card-header__title {

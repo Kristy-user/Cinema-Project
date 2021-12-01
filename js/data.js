@@ -6,7 +6,7 @@ const createmockData = (numArrLength) => {
     (item, index) =>
       (item = {
         titles: titles[index],
-        releseDate: randomDate('01-01-1990', '01-01-2021') || '-',
+        releaseDate: randomDate('01/01/1990', '01/01/2021') || '-',
         plot: description[randomInt(0, description.length - 1)] || '-',
         poster: `./images/posters/${index + 1}.jpg`,
         boxOffice: randomInt(300000000, 600000000) || 0,

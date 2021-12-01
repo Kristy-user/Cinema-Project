@@ -11,12 +11,12 @@ const randomInt = (minValue = 1, maxValue = 0) => {
 };
 
 const randomDate = (date1, date2) => {
-  date1 = new Date(date1).getTime();
-  date2 = new Date(date2).getTime();
+  date1 = new Date(date1);
+  date2 = new Date(date2);
   if (date1 > date2) {
-    return new Date(randomInt(date2, date1)).toLocaleDateString();
+    return new Date(randomInt(date2, date1));
   } else {
-    return new Date(randomInt(date1, date2)).toLocaleDateString();
+    return new Date(randomInt(date1, date2));
   }
 };
 

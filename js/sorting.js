@@ -18,8 +18,7 @@ const sortData = (render, data) => {
       render(
         data.sort(
           (data1, data2) =>
-            new Date(data2.releaseDate).getTime() -
-            new Date(data1.releaseDate).getTime()
+            new Date(data2.releaseDate) - new Date(data1.releaseDate)
         )
       );
     }

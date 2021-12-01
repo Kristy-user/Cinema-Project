@@ -3,7 +3,7 @@ import { maxLength } from './utils.js';
 const createFilmsCard = (obj) => {
   const template = document.querySelector('#card-template');
   let cloneDiv = template.content.cloneNode(true);
-  let { titles, poster, rating, releseDate, director, plot, boxOffice } = obj;
+  let { titles, poster, rating, releaseDate, director, plot, boxOffice } = obj;
   cloneDiv.querySelector('.card-header__title').textContent = titles;
   cloneDiv.querySelector('.card-header__image').src = poster;
   cloneDiv.querySelector('.film-info__rating .film-info__text').textContent =
@@ -12,7 +12,7 @@ const createFilmsCard = (obj) => {
     maxLength(plot);
   cloneDiv.querySelector(
     '.film-info__release-date .film-info__text'
-  ).textContent = releseDate;
+  ).textContent = releaseDate.toLocaleDateString();
   cloneDiv.querySelector('.film-info__director .film-info__text').textContent =
     director;
   cloneDiv.querySelector(

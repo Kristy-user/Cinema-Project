@@ -16,4 +16,4 @@ const initSearch = (render, data) => {
     }
   });
 };
-export { initSearch };
+export { initSearch, sortingButtons, inputSearch };

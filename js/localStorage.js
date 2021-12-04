@@ -11,29 +11,6 @@ const removeFilmFromFavoritesList = (arr, value) => {
   return arr;
 };
 
-const addToFavorites = () => {
-  filmList.addEventListener('click', (event) => {
-    const { target } = event;
-    if (target.closest('.button')) {
-      target.closest('.button').classList.toggle('button_remove');
-    }
-    if (target.closest('.button')) {
-      target.closest('.button').classList.toggle('button_add');
-    }
-    if (target.closest('.button').classList.contains('button_remove')) {
-      favoritesFilmsList.push(target.closest('.card').innerHTML);
-
-      target.closest('.card').remove();
-    }
-    if (target.closest('.button').classList.contains('button_add')) {
-      removeFilmFromFavoritesList(
-        favoritesFilmsList,
-        target.closest('.card').innerHTML
-      );
-    }
-  });
-};
-
 const getFavoritesList = () => {
   localStorage.setItem('favorites', JSON.stringify(favoritesFilmsList));
   filmList.innerHTML = '';
@@ -42,6 +19,27 @@ const getFavoritesList = () => {
     divCard.classList.add('card');
     divCard.insertAdjacentHTML('afterBegin', item);
     filmList.append(divCard);
+  });
+};
+
+const addToFavorites = () => {
+  filmList.addEventListener('click', (event) => {
+    const { target } = event;
+    target.closest('.card').remove();
+    if (target.closest('.button').classList.contains('button_add')) {
+      if (favoritesFilmsList) {
+        removeFilmFromFavoritesList(
+          favoritesFilmsList,
+          target.closest('.card').innerHTML
+        );
+      }
+      target.closest('.button').classList.toggle('button_remove');
+    }
+    if (target.closest('.button').classList.contains('button_remove')) {
+      favoritesFilmsList.push(target.closest('.card').innerHTML);
+      target.closest('.button').classList.toggle('button_add');
+      console.log(favoritesFilmsList);
+    }
   });
 };
 
@@ -55,6 +53,7 @@ const showFavoritesFilms = (data, render) => {
     }
     if (checkValue) {
       getFavoritesList();
+
       sortingButtons.forEach((item) => item.classList.remove('button_checked'));
       inputSearch.value = '';
     }

@@ -25,7 +25,9 @@ const getFavoritesList = () => {
 const addToFavorites = () => {
   filmList.addEventListener('click', (event) => {
     const { target } = event;
-    target.closest('.card').remove();
+    if (target.tagName !== 'path') {
+      return;
+    }
     if (target.closest('.button').classList.contains('button_add')) {
       if (favoritesFilmsList) {
         removeFilmFromFavoritesList(
@@ -34,11 +36,13 @@ const addToFavorites = () => {
         );
       }
       target.closest('.button').classList.toggle('button_remove');
+      target.closest('.card').remove();
     }
     if (target.closest('.button').classList.contains('button_remove')) {
       favoritesFilmsList.push(target.closest('.card').innerHTML);
       target.closest('.button').classList.toggle('button_add');
-      console.log(favoritesFilmsList);
+
+      target.closest('.card').remove();
     }
   });
 };

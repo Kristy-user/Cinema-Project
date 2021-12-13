@@ -9,7 +9,11 @@ const sortData = (render, data) => {
       sortingButtons.forEach((item) => item.classList.remove('button_checked'));
       target.classList.add('button_checked');
       render(
-        data.sort((value1, value2) => value2.rating * 10 - value1.rating * 10)
+        data.sort(
+          (value1, value2) =>
+            parseFloat(value2.imdbRating) * 10 -
+            parseFloat(value1.imdbRating) * 10
+        )
       );
     }
     if (criterion === 'releaseDate') {
@@ -17,17 +21,19 @@ const sortData = (render, data) => {
       target.classList.add('button_checked');
       render(
         data.sort(
-          (data1, data2) =>
-            new Date(data2.releaseDate) - new Date(data1.releaseDate)
+          (data1, data2) => new Date(data2.Released) - new Date(data1.Released)
         )
       );
     }
     if (criterion === 'boxOffice') {
       sortingButtons.forEach((item) => item.classList.remove('button_checked'));
       target.classList.add('button_checked');
-
       render(
-        data.sort((value1, value2) => value2.boxOffice - value1.boxOffice)
+        data.sort(
+          (value1, value2) =>
+            value2.BoxOffice.slice(1).split(',').join('') -
+            value1.BoxOffice.slice(1).split(',').join('')
+        )
       );
     }
   });

@@ -4,12 +4,12 @@ const initSearch = (render, data) => {
   inputSearch.addEventListener('keyup', (event) => {
     const inputValue = event.target.value;
     if (inputValue) {
+      sortingButtons.forEach((item) => item.classList.remove('button_checked'));
       render(
         data.filter((data) =>
-          data.titles.toLowerCase().includes(inputValue.toLowerCase())
+          data.Title.toLowerCase().includes(inputValue.toLowerCase())
         )
       );
-      sortingButtons.forEach((item) => item.classList.remove('button_checked'));
     }
     if (!inputValue) {
       return render(data);

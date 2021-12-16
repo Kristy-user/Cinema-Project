@@ -1,9 +1,15 @@
+import { favorite } from './localStorage.js';
+import { createArrayFromDivCards } from './render.js';
+
 const sortingButtons = document.querySelectorAll('.sorting .button');
 const sortingPanel = document.querySelector('.control-panel.sorting');
 
 const sortData = (render, data) => {
   sortingPanel.addEventListener('click', (event) => {
     const { target } = event;
+    if (favorite.checked) {
+      data = createArrayFromDivCards();
+    }
     let criterion = event.target.id;
     if (criterion === 'rating') {
       sortingButtons.forEach((item) => item.classList.remove('button_checked'));
@@ -38,4 +44,5 @@ const sortData = (render, data) => {
     }
   });
 };
+
 export { sortData };

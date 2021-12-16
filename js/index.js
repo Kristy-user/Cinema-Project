@@ -1,27 +1,18 @@
-import { renderCards, createArrayFromDivCards } from './render.js';
+import { renderCards } from './render.js';
 import { sortData } from './sorting.js';
 import { initSearch } from './searching.js';
-import {
-  addToFavorites,
-  showFavoritesFilms,
-  getFromLocalStorage,
-} from './localStorage.js';
+import { addToFavorites, showFavoritesFilms } from './localStorage.js';
 import { getTokenData } from './API.js';
 
-if (
-  localStorage.getItem('lastFilmsList') &&
-  JSON.parse(localStorage.getItem('lastFilmsList')).length !== 0
-) {
-  getFromLocalStorage('lastFilmsList');
-  let filmList = createArrayFromDivCards();
-  sortData(renderCards, filmList);
-  initSearch(renderCards, filmList);
-} else {
-  getTokenData().then((newFilmList) => {
-    renderCards(newFilmList);
-    sortData(renderCards, newFilmList);
-    initSearch(renderCards, newFilmList);
-  });
-}
+const filmListFromApi = [];
+
+getTokenData().then((newFilms) => {
+  filmListFromApi.push(...newFilms);
+  renderCards(filmListFromApi);
+});
+
+showFavoritesFilms(filmListFromApi, renderCards);
+sortData(renderCards, filmListFromApi);
+initSearch(renderCards, filmListFromApi);
+
 addToFavorites();
-showFavoritesFilms();

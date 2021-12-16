@@ -1,5 +1,3 @@
-import { renderCards } from './render.js';
-
 let apiUrl = 'https://fe08-films.herokuapp.com';
 
 function getTokenData() {

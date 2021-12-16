@@ -1,3 +1,4 @@
+import { addFilmCards, favorite } from './localStorage.js';
 import { maxLength } from './utils.js';
 
 const createFilmsCard = (obj) => {
@@ -22,6 +23,30 @@ const createFilmsCard = (obj) => {
   return cloneDiv;
 };
 
+const showWithoutFavorites = () => {
+  const filmsList = [];
+  document
+    .querySelectorAll('.card')
+    .forEach((item) => filmsList.push(item.innerHTML));
+  const favoritesFilms = JSON.parse(localStorage.getItem('favorites'));
+  const newFilmList = searchDifference(filmsList, favoritesFilms);
+  return newFilmList;
+};
+
+const searchDifference = (array1, array2) => {
+  let result = [];
+  for (var i = 0; i < array1.length; i++) {
+    if (
+      array2
+        .map((item) => item.slice(0, 150))
+        .indexOf(array1.map((item) => item.slice(0, 150))[i]) == -1
+    ) {
+      result.push(array1[i]);
+    }
+  }
+  return result;
+};
+
 const renderCards = (data) => {
   const filmList = document.querySelector('.film-list');
   filmList.innerHTML = '';
@@ -31,11 +56,11 @@ const renderCards = (data) => {
     cardsElements.push(createFilmsCard(data));
   });
   filmList.append(...cardsElements);
-  let lastFilmsList = [];
-  document
-    .querySelectorAll('.card')
-    .forEach((item) => lastFilmsList.push(item.innerHTML));
-  localStorage.setItem('lastFilmsList', JSON.stringify(lastFilmsList));
+  if (favorite.checked || !localStorage.getItem('favorites')) {
+    return;
+  }
+  let newfilmList = showWithoutFavorites();
+  addFilmCards(newfilmList);
 };
 
 const createArrayFromDivCards = () => {
@@ -58,7 +83,7 @@ const createArrayFromDivCards = () => {
       '.film-info__plot .film-info__text'
     ).innerHTML;
     obj.BoxOffice = item.querySelector(
-      '.film-info__director .film-info__text'
+      '.film-info__box-office .film-info__text'
     ).innerHTML;
     filmCardsArray.push(obj);
   });

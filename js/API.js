@@ -1,14 +1,15 @@
-let apiUrl = 'https://fe08-films.herokuapp.com';
+const API_URL = 'https://fe08-films.herokuapp.com';
 
 function getTokenData() {
-  return fetch(`${apiUrl}/auth`, {
+  return fetch(`${API_URL}/auth`, {
     method: 'POST',
   })
     .then((response) => response.json())
-    .then((data) => getFilmsData(data.token));
+    .then((data) => data.token);
 }
+
 function getFilmsData(token) {
-  return fetch(`${apiUrl}/films`, {
+  return fetch(`${API_URL}/films`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -30,4 +31,4 @@ function getFilmsData(token) {
     .catch((error) => console.log('error', error));
 }
 
-export { getTokenData };
+export { getTokenData, getFilmsData };

@@ -1,48 +1,45 @@
-import { favorite } from './localStorage.js';
-import { createArrayFromDivCards } from './render.js';
+const SORTING_BUTTONS = document.querySelectorAll('.sorting .button');
+const SORTING_PANEL = document.querySelector('.control-panel.sorting');
 
-const sortingButtons = document.querySelectorAll('.sorting .button');
-const sortingPanel = document.querySelector('.control-panel.sorting');
+const RATING = 'rating';
+const DATE = 'releaseDate';
+const BOX_OFFICE = 'boxOffice';
 
 const sortData = (render, data) => {
-  sortingPanel.addEventListener('click', (event) => {
+  SORTING_PANEL.addEventListener('click', (event) => {
     const { target } = event;
-    if (favorite.checked) {
-      data = createArrayFromDivCards();
-    }
     let criterion = event.target.id;
-    if (criterion === 'rating') {
-      sortingButtons.forEach((item) => item.classList.remove('button_checked'));
-      target.classList.add('button_checked');
-      render(
-        data.sort(
-          (value1, value2) =>
-            parseFloat(value2.imdbRating) * 10 -
-            parseFloat(value1.imdbRating) * 10
-        )
-      );
+    switch (criterion) {
+      case RATING:
+        render(
+          data.sort(
+            (value1, value2) =>
+              parseFloat(value2.imdbRating) * 10 -
+              parseFloat(value1.imdbRating) * 10
+          )
+        );
+        break;
+      case DATE:
+        render(
+          data.sort(
+            (data1, data2) =>
+              new Date(data2.Released) - new Date(data1.Released)
+          )
+        );
+        break;
+      case BOX_OFFICE:
+        render(
+          data.sort(
+            (value1, value2) =>
+              value2.BoxOffice.slice(1).split(',').join('') -
+              value1.BoxOffice.slice(1).split(',').join('')
+          )
+        );
+        break;
     }
-    if (criterion === 'releaseDate') {
-      sortingButtons.forEach((item) => item.classList.remove('button_checked'));
-      target.classList.add('button_checked');
-      render(
-        data.sort(
-          (data1, data2) => new Date(data2.Released) - new Date(data1.Released)
-        )
-      );
-    }
-    if (criterion === 'boxOffice') {
-      sortingButtons.forEach((item) => item.classList.remove('button_checked'));
-      target.classList.add('button_checked');
-      render(
-        data.sort(
-          (value1, value2) =>
-            value2.BoxOffice.slice(1).split(',').join('') -
-            value1.BoxOffice.slice(1).split(',').join('')
-        )
-      );
-    }
+    SORTING_BUTTONS.forEach((item) => item.classList.remove('button_checked'));
+    target.classList.add('button_checked');
   });
 };
 
-export { sortData };
+export { sortData, SORTING_BUTTONS };

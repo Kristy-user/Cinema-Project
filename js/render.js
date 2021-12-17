@@ -1,4 +1,4 @@
-import { addFilmCards, favorite } from './localStorage.js';
+import { addFilmCards, FAVORITE } from './localStorage.js';
 import { maxLength } from './utils.js';
 
 const createFilmsCard = (obj) => {
@@ -36,11 +36,7 @@ const showWithoutFavorites = () => {
 const searchDifference = (array1, array2) => {
   let result = [];
   for (var i = 0; i < array1.length; i++) {
-    if (
-      array2
-        .map((item) => item.slice(0, 150))
-        .indexOf(array1.map((item) => item.slice(0, 150))[i]) == -1
-    ) {
+    if (array2.indexOf(array1[i]) == -1) {
       result.push(array1[i]);
     }
   }
@@ -56,7 +52,7 @@ const renderCards = (data) => {
     cardsElements.push(createFilmsCard(data));
   });
   filmList.append(...cardsElements);
-  if (favorite.checked || !localStorage.getItem('favorites')) {
+  if (!localStorage.getItem('favorites') || FAVORITE.checked) {
     return;
   }
   let newfilmList = showWithoutFavorites();

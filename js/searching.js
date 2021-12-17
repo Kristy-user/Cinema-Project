@@ -1,17 +1,13 @@
-import { createArrayFromDivCards } from './render.js';
-
-const inputSearch = document.querySelector('.search__input');
-const sortingButtons = document.querySelectorAll('.sorting .button');
+import { SORTING_BUTTONS } from './sorting.js';
+const INPUT_SEARCH = document.querySelector('.search__input');
 
 const initSearch = (render, data) => {
-  if (favorite.checked) {
-    data = createArrayFromDivCards();
-  }
-  inputSearch.addEventListener('keyup', (event) => {
+  INPUT_SEARCH.addEventListener('keyup', (event) => {
     const inputValue = event.target.value;
     if (inputValue) {
-      sortingButtons.forEach((item) => item.classList.remove('button_checked'));
-
+      SORTING_BUTTONS.forEach((item) =>
+        item.classList.remove('button_checked')
+      );
       render(
         data.filter((data) =>
           data.Title.toLowerCase().includes(inputValue.toLowerCase())
@@ -23,4 +19,4 @@ const initSearch = (render, data) => {
     }
   });
 };
-export { initSearch, sortingButtons, inputSearch };
+export { initSearch, INPUT_SEARCH };

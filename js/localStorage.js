@@ -64,6 +64,8 @@ const showFavoritesFilms = (dataFilms) => {
     if (!checkValue) {
       dataFilms = filmListFromApi;
       renderCards(dataFilms);
+      initSearch(renderCards, dataFilms);
+      sortData(renderCards, dataFilms);
     }
     if (checkValue && localStorage.getItem('favorites')) {
       favoritesFilmsList = JSON.parse(localStorage.getItem('favorites'));
@@ -73,9 +75,10 @@ const showFavoritesFilms = (dataFilms) => {
       );
       INPUT_SEARCH.value = '';
       dataFilms = createArrayFromDivCards();
+      initSearch(renderCards, dataFilms);
+      sortData(renderCards, dataFilms);
     }
-    initSearch(renderCards, dataFilms);
-    sortData(renderCards, dataFilms);
+    console.log(dataFilms);
   });
 };
 

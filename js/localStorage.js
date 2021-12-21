@@ -67,8 +67,10 @@ const showFavoritesFilms = (dataFilms) => {
       initSearch(renderCards, dataFilms);
       sortData(renderCards, dataFilms);
     }
-    if (checkValue && localStorage.getItem('favorites')) {
-      favoritesFilmsList = JSON.parse(localStorage.getItem('favorites'));
+    if (checkValue) {
+      favoritesFilmsList = localStorage.getItem('favorites')
+        ? JSON.parse(localStorage.getItem('favorites'))
+        : [];
       addFilmCards(favoritesFilmsList);
       SORTING_BUTTONS.forEach((item) =>
         item.classList.remove('button_checked')
@@ -78,7 +80,6 @@ const showFavoritesFilms = (dataFilms) => {
       initSearch(renderCards, dataFilms);
       sortData(renderCards, dataFilms);
     }
-    console.log(dataFilms);
   });
 };
 

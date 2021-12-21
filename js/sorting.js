@@ -9,6 +9,14 @@ const sortData = (render, data) => {
   SORTING_PANEL.addEventListener('click', (event) => {
     const { target } = event;
     let criterion = event.target.id;
+    if (!target.closest('.button')) {
+      return;
+    } else {
+      SORTING_BUTTONS.forEach((item) =>
+        item.classList.remove('button_checked')
+      );
+      target.closest('.button').classList.add('button_checked');
+    }
     switch (criterion) {
       case RATING:
         render(
@@ -37,8 +45,6 @@ const sortData = (render, data) => {
         );
         break;
     }
-    SORTING_BUTTONS.forEach((item) => item.classList.remove('button_checked'));
-    target.classList.add('button_checked');
   });
 };
 

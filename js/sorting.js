@@ -1,3 +1,4 @@
+import { FAVORITE } from './localStorage.js';
 const SORTING_BUTTONS = document.querySelectorAll('.sorting .button');
 const SORTING_PANEL = document.querySelector('.control-panel.sorting');
 
@@ -44,6 +45,11 @@ const sortData = (render, data) => {
           )
         );
         break;
+    }
+    if (FAVORITE.checked) {
+      document
+        .querySelectorAll('.card__button')
+        .forEach((item) => item.classList.add('button_remove'));
     }
   });
 };

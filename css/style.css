@@ -97,8 +97,8 @@ h1 {
   text-align: center;
   color: #f0f0ea;
   background-color: #64588d;
-  padding: 1.5rem 1rem;
   margin: 0;
+  min-height: 80px;
 }
 
 .card__body {
@@ -252,9 +252,33 @@ h1 {
   color: #ffffff;
 }
 
-/*
-  Film-info
-*/
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #64588d;
+  width: 200px;
+  height: 200px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  margin: 10px auto;
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 .film-info {
   display: grid;

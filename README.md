@@ -1,4 +1,6 @@
-﻿# Cinema-project (Github hosting:https://kristy-user.github.io/Cinema-Project/)
+﻿# Cinema-project
+ 
+Github hosting: https://kristy-user.github.io/Cinema-Project
 
 
 # **Техническое задание**
